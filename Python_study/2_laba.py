@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 K = int(input('Введите число K: '))
 N = int(input('Введите число N от 3 до 100: '))
 while True:
@@ -34,7 +35,7 @@ if s>p:
 else:
     for x in range(N//2):
         for y in range(N//2):
-            F[x][y],F[x][N//2+1+y]=F[x][N//2+1+y],F[x][y]
+            F[x][y],F[x][N//2+nch+y]=F[x][N//2+nch+y],F[x][y]
     print('Матрицы В и Е были поменяны несимметрично')
 print(f'Измененная матрица F:\n{F}')
 opred = np.linalg.det(A)
@@ -53,3 +54,21 @@ print(f'Обратная матрица F:\n{F}')
 if opred>sumdiag: result = A*At-K*F
 else: result = (At+G-F)*K
 print(f'Результат операций:\n{result}')
+plt.figure(figsize=(8, 6))
+plt.plot(np.diag(F), marker='o', linestyle='-')
+plt.title('Линейный график диагональных элементов матрицы F')
+plt.xlabel('Номер строки/столбца')
+plt.ylabel('Значение элемента')
+plt.figure(figsize=(8, 6))
+plt.hist(F[0, :], bins=10, label='Строка 1')
+plt.hist(F[1, :], bins=10, label='Строка 2')
+plt.hist(F[2, :], bins=10, label='Строка 3')
+plt.title('Гистограммы элементов по строкам')
+plt.legend()
+plt.figure(figsize=(8, 6))
+plt.hist(F[:, 0], bins=10, label='Столбец 1')
+plt.hist(F[:, 1], bins=10, label='Столбец 2')
+plt.hist(F[:, 2], bins=10, label='Столбец 3')
+plt.title('Гистограммы элементов по столбцам')
+plt.legend()
+plt.show()
