@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 K = int(input('Введите число K: '))
