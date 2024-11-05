@@ -12,11 +12,13 @@ d={
     '8':'восемь',
 }
 f=open("3.txt", 'r')
-for line in f:
-    objects = line.strip().split()
+s = f.readline()
+while s!='':
+    objects = s.strip().split()
     for obj in objects:
         match = re.match(r"^-?[13579]\d*$", obj)
         if match:
             for key in d:
                 obj = obj.replace(key,d[key])
             print(obj, end=" ")      
+    s=f.readline()
