@@ -4,7 +4,7 @@
 времени вычисления представить в табличной форме. Обязательное требование – минимизация времени 
 выполнения и объема памяти. F(1)=1,F(n)= (-1)^n*(F(n–1) + (n + 1)! / (2n)!), при n > 1'''
 from timeit import Timer
-from functools import partial, lru_cache
+from functools import partial
 import math
 n=input('Введите натуральное число n > 1: ')
 while True:
