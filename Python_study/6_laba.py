@@ -16,11 +16,12 @@ def alg(n):
             a.append(i)
     return a
 def func(n):
-    a = [str(ch) for ch in range(1,n,2)]
+    a = [str(ch) for ch in range(1,n)]
     matches=[]
     for el in a:
-        match = re.match(r"^[13579]\d*[13579]?$", el)
-        if match: matches.append(int(el))
+        match1 = re.match(r"^[13579]$", el)
+        match2 = re.match(r"^[13579]\d*[13579]$", el)
+        if match1 or match2: matches.append(int(el))
     return matches
 n=input('Введите целое число n: ')
 while True:
