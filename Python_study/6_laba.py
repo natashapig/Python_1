@@ -20,7 +20,6 @@ def func(n):
     matches=[]
     for el in a:
         match = re.match(r"^[13579]\d*[13579]?$", el)
-        print(el)
         if match: matches.append(int(el))
     return matches
 n=input('Введите целое число n: ')
