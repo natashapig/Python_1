@@ -8,19 +8,20 @@
 '''
 from timeit import Timer
 from functools import partial
+import re
 def alg(n):
     a=[]
     for i in range(1,n):
         if int(str(i)[0]) % 2 != 0 and int(str(i)[-1]) % 2 != 0:
             a.append(i)
     return a
-def func(n):   
-    def is_odd_digit(number):
-        return (int(str(number)[0]) % 2 != 0 and int(str(number)[-1]) % 2 != 0)
-    a=[]
-    for i in range(1,n):
-        if is_odd_digit(i): a.append(i)
-    return a
+def func(n):
+    a = str([ch for ch in range(1,n,2)])
+    matches=[]
+    for el in a:
+        match = re.match(r"^[13579]\d*[13579]?$", el)
+        if match: matches.append(int(el))
+    return matches
 n=input('Введите целое число n: ')
 while True:
     if n.isnumeric():
@@ -29,11 +30,11 @@ while True:
         else: n=input('Вы ввели некорректное число n. Введите целое число n: ')
     else: n=input('Вы ввели некорректное число n. Введите целое число n: ')
 print(f'n: {n}')
-print(alg(n))
 print()
+print(alg(n))
 alg_time = Timer(partial(alg,n)).timeit(number=1000)
 print(f'Время выполнение алгоритмическим способом формирования: {alg_time}')
-print(func(n))
 print()
+print(func(n))
 func_time = Timer(partial(alg,n)).timeit(number=1000)
 print(f'Время выполнение функциональным способом формирования: {func_time}')
