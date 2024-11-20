@@ -6,8 +6,7 @@
 функцию для нахождения оптимального  решения.
 Вывести все натуральные числа до n, которые начинаются и заканчиваются нечетной цифрой.
 '''
-from timeit import Timer
-from functools import partial
+import timeit
 import re
 def alg(n):
     a=[]
@@ -33,9 +32,9 @@ while True:
 print(f'n: {n}')
 print()
 print(alg(n))
-alg_time = Timer(partial(alg,n)).timeit(number=1000)
+alg_time =timeit.timeit('alg(n)', globals = globals(), number =1)
 print(f'Время выполнение алгоритмическим способом формирования: {alg_time}')
 print()
 print(func(n))
-func_time = Timer(partial(alg,n)).timeit(number=1000)
+func_time = timeit.timeit('func(n)', globals = globals(), number =1)
 print(f'Время выполнение функциональным способом формирования: {func_time}')

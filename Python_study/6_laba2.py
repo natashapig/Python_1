@@ -8,7 +8,6 @@
 Найти сумму всех чисел, в которых первая ии последняя цифры совпадают.
 '''
 import timeit
-from functools import partial
 import re
 
 def alg(n):
