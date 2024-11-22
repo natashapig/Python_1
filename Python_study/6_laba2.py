@@ -6,7 +6,7 @@
 функцию для нахождения оптимального  решения.
 Вывести все натуральные числа до n, которые начинаются и заканчиваются нечетной цифрой.
 Найти наибольшую сумму цифр среди выведенных чисел, вывести с наибольшим остатком от деления 
-на 3.
+на 3, причем это должно быть наибольшее число с данной суммой цифр.
 '''
 import timeit
 import re
@@ -21,10 +21,10 @@ def alg(n):
             a.append(i)
             for cz in str(i):
                 tsumm+=int(cz)
-            if tsumm%3==2 and msumm<tsumm:
+            if tsumm%3==2 and msumm<=tsumm:
                     msumm=tsumm
                     chislo=i
-    print(f"Наибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в числе {chislo}: {msumm}")
+    print(f"Наибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в наибольшем числе {chislo}: {msumm}")
     return a
 def func(n):
     tsumm=0
@@ -39,11 +39,11 @@ def func(n):
             for cz in el:
                 ch.append(int(cz))
             tsumm=sum(ch)
-            if tsumm%3==2 and tsumm>msumm:
-                msumm=max(tsumm,msumm)
+            if tsumm%3==2 and tsumm>=msumm:
+                msumm=tsumm
                 chislo=int(el)
             matches.append(int(el))
-    print(f"Наибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в числе {chislo}: {msumm}")
+    print(f"Наибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в наибольшем числе {chislo}: {msumm}")
     return matches
 n=input('Введите целое число n: ')
 while True:
