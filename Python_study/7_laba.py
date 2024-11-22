@@ -8,24 +8,34 @@ import re
 import tkinter as tk
 
 def alg(n):
-    summ=0
+    msumm,chislo=0,0
     a=[]
     for i in range(1,n,2):
+        tsumm=0
         if int(str(i)[0]) % 2 != 0:
             a.append(i)
-            if str(i)[0]==str(i)[-1]:
-                summ+=i
-    return a,summ
+            for cz in str(i):
+                tsumm+=int(cz)
+            if tsumm%3==2 and msumm<=tsumm:
+                    msumm=tsumm
+                    chislo=i
+    return a,msumm,chislo
 def func(n):
-    summ=0
+    tsumm,msumm,chislo=0,0,0
     a = [str(ch) for ch in range(1,n,2)]
     matches=[]
     for el in a:
         match = re.match(r"^[13579]\d*$", el)
         if match:
-            if el[0]==el[-1]: summ+=int(el)
+            ch=[]
+            for cz in el:
+                ch.append(int(cz))
+            tsumm=sum(ch)
+            if tsumm%3==2 and msumm<=tsumm:
+                msumm=tsumm
+                chislo=int(el)
             matches.append(int(el))
-    return matches,summ
+    return matches,msumm,chislo
 def is_n():
     global n
     n=entry1.get()
@@ -35,15 +45,20 @@ def is_n():
         if n>0:
             alg_time =timeit.timeit('alg(n)', globals = globals(), number =1)
             func_time = timeit.timeit('func(n)', globals = globals(), number =1)
-            te = f'n: {n}\n\nАлгоритмический метод\nПодходящие числа: \n{alg(n)[0]}\nСумма всех чисел, в которых первая и последняя цифры совпадают: {alg(n)[1]}\nВремя выполнение алгоритмическим способом формирования: {alg_time}\n\nФункциональный метод\nПодходящие числа: \n{func(n)[0]}\nСумма всех чисел, в которых первая и последняя цифры совпадают: {func(n)[1]}\nВремя выполнение функциональным способом формирования: {func_time}'
+            te = f'n: {n} \n\nАлгоритмический метод\nПодходящие числа: \n{alg(n)[0]} \nНаибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в наибольшем числе {alg(n)[2]}: {alg(n)[1]}\nВремя выполнение алгоритмическим способом формирования: {alg_time}\n\nФункциональный метод\nПодходящие числа: \n{func(n)[0]}\nНаибольшая сумма цифр в выведенных числах, которая при делении на 3 дает наибольший остаток(2), находится в наибольшем числе {func(n)[2]}: {func(n)[1]}\nВремя выполнение функциональным способом формирования: {func_time}'
             t.insert(1.0,te)
-        else: t.insert(1.0,'Вы ввели некорректное число n. Введите целое число n.')
-    else: t.insert(1.0,'Вы ввели некорректное число n. Введите целое число n.')
+            scrollbar = tk.Scrollbar(orient="vertical", command = t.yview)
+            t["yscrollcommand"]=scrollbar.set
+            scrollbar.grid(row=2,column=0,columnspan=2,sticky='nse',pady=10)
+            t.yview_scroll(number=1, what="units")
+            scrollbar.config(command=t.yview)
+        else: t.insert(1.0,'Вы ввели некорректное число n. Введите натуральное число n.')
+    else: t.insert(1.0,'Вы ввели некорректное число n. Введите натуральное число n.')
 def quit():
     win.quit()
 win = tk.Tk()
 win.geometry('700x350')
-lbl1 = tk.Label(text='Введите целое число n: ',font='9')
+lbl1 = tk.Label(text='Введите натуральное число n: ',font='9')
 lbl1.grid(row=0, column=0, pady=10)
 win.columnconfigure(index=0, weight=350)
 win.columnconfigure(index=1, weight=350)
