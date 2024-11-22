@@ -14,7 +14,7 @@ d={
 f=open("3.txt", 'r')
 s = f.readline()
 while s!='':
-    objects = s.strip().split()
+    objects = s.split()
     for obj in objects:
         match = re.match(r"^-?[13579]\d*$", obj)
         if match:
