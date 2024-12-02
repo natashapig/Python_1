@@ -1,4 +1,4 @@
-f = open('3.txt', 'r', encoding='utf-8')
+f = open('3.txt', 'r')
 d={
     '0':'ноль',
     '2':'два',
